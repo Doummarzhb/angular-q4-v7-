@@ -24,6 +24,7 @@ import { LoadingInterceptor } from './services/loading.interceptor';
 import { LoadingService } from './services/loading.service';
 import { UsersService } from './services/users.service';
 import { MatTableModule } from '@angular/material/table';
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { MatTableModule } from '@angular/material/table';
   providers: [
     UsersService,
     LoadingService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
