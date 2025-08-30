@@ -4,7 +4,7 @@
   <button mat-button color="primary" (click)="back()" class="back-btn"><mat-icon>arrow_back</mat-icon> Back</button>
 
   <mat-card class="user-card">
-    <img mat-card-image [src]="user.avatar" alt="{{user.first_name}}" class="avatar-large">
+    <img mat-card-image [src]="user.avatar" alt="{{user.first_name}} {{user.last_name}} " class="avatar-large">
     <mat-card-content>
       <h2>{{user.first_name}} {{user.last_name}}</h2>
       <p><strong>ID:</strong> {{user.id}}</p>

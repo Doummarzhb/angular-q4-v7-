@@ -26,12 +26,13 @@ export class HeaderComponent implements OnInit {
       })
     ).subscribe((user: User | null) => {
       if (user) {
-        // navigate to details immediately
+
         this.router.navigate(['/users', user.id]);
       } else {
-        // navigate to list
+
         this.router.navigate(['/']);
       }
     });
   }
+
 }

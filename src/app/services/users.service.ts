@@ -40,7 +40,7 @@ export class UsersService {
         page
       });
     }
-    return this.http.get<any>(`https://reqres.in/api/users?page=${page}`).pipe(
+    return this.http.get<any>(`/api/users?page=${page}`).pipe(
       tap(res => {
         res.data.forEach((u: User) => this.userCache.set(u.id, u));
         this.pageCache.set(page, res.data);
@@ -54,7 +54,8 @@ export class UsersService {
     if (this.userCache.has(id)) {
       return of(this.userCache.get(id)!);
     }
-    return this.http.get<any>(`https://reqres.in/api/users/${id}`).pipe(
+
+    return this.http.get<any>(`/api/users/${id}`).pipe(
       map(res => {
         const u = res.data as User;
         this.userCache.set(u.id, u);
@@ -66,4 +67,5 @@ export class UsersService {
       })
     );
   }
+
 }

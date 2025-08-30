@@ -21,9 +21,10 @@ export class UsersListComponent implements OnInit {
     this.loadPage(1);
 
     this.usersService.searchResults$.subscribe(results => {
-      if(results.length) {
+
+      if (results.length) {
         this.users = results;
-        this.totalPages = 1; // hide pagination
+        this.totalPages = 1;
         this.supportInfo = (results[0] as any).support || null;
       } else if(this.searchId) {
         this.users = [];
@@ -31,6 +32,7 @@ export class UsersListComponent implements OnInit {
       }
     });
   }
+
 
   loadPage(page: number) {
     this.loading = true;
@@ -44,7 +46,9 @@ export class UsersListComponent implements OnInit {
   }
 
   onSearch() {
-    if(this.searchId) this.usersService.searchUserById(this.searchId);
+    if (this.searchId) {
+      this.usersService.searchUserById(this.searchId);
+    }
   }
 
   clearSearch() {
@@ -52,7 +56,9 @@ export class UsersListComponent implements OnInit {
     this.loadPage(1);
   }
 
-  goToUser(id: number) { this.router.navigate(['/users', id]); }
+  goToUser(id: number) {
+    this.router.navigate([`/users/${id}`]);
+  }
   prev() { if (this.page > 1) this.loadPage(this.page - 1); }
   next() { if (this.page < this.totalPages) this.loadPage(this.page + 1); }
 }
