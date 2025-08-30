@@ -24,3 +24,38 @@ mat-card {
 .spacer {
   flex: 1 1 auto;
 }
+.users-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0;
+
+  .user-card {
+    width: 200px;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

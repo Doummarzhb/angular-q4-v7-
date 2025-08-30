@@ -1,8 +1,9 @@
 <mat-toolbar color="primary">
   <span>Users List</span>
   <span class="spacer"></span>
-  <mat-form-field>
-    <input matInput placeholder="Search by ID" [(ngModel)]="searchId" (ngModelChange)="searchUser()">
+  <mat-form-field appearance="outline">
+    <mat-label>Search by ID</mat-label>
+    <input matInput type="number" [(ngModel)]="searchId" (input)="searchUser()" />
   </mat-form-field>
 </mat-toolbar>
 
@@ -10,15 +11,16 @@
   <mat-spinner></mat-spinner>
 </div>
 
-<div class="users-container" *ngIf="!loading">
-  <mat-card *ngFor="let user of users" (click)="goToUser(user.id)">
-    <img mat-card-image [src]="user.avatar" alt="{{user.first_name}}">
-    <mat-card-content>
-      <h3>{{ user.first_name }} {{ user.last_name }}</h3>
-      <p>ID: {{ user.id }}</p>
-    </mat-card-content>
+<div class="users-container">
+  <mat-card *ngFor="let user of users" class="user-card" (click)="goToUser(user.id)" [@fadeIn]>
+    <img mat-card-avatar [src]="user.avatar" alt="avatar">
+    <mat-card-title>{{ user.first_name }} {{ user.last_name }}</mat-card-title>
+    <mat-card-subtitle>ID: {{ user.id }}</mat-card-subtitle>
   </mat-card>
 </div>
 
-<mat-paginator [length]="totalPages*6" [pageSize]="6" (page)="loadUsers($event.pageIndex+1)">
-</mat-paginator>
+<div class="pagination">
+  <button mat-raised-button color="primary" (click)="prevPage()" [disabled]="page === 1">Previous</button>
+  <span>Page {{ page }} of {{ totalPages }}</span>
+  <button mat-raised-button color="primary" (click)="nextPage()" [disabled]="page === totalPages">Next</button>
+</div>
