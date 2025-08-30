@@ -4,8 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// Angular Material 7 imports
-import { MatButtonModule, MatCardModule, MatInputModule, MatToolbarModule, MatProgressSpinnerModule, MatPaginatorModule } from '@angular/material';
+// Angular Material v7 imports
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,8 +33,7 @@ import { LoadingInterceptor } from './services/loading.interceptor';
     MatCardModule,
     MatInputModule,
     MatToolbarModule,
-    MatProgressSpinnerModule,
-    MatPaginatorModule
+    MatProgressSpinnerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }

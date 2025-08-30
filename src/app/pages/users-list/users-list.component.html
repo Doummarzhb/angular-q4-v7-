@@ -1,9 +1,8 @@
 <mat-toolbar color="primary">
   <span>Users List</span>
   <span class="spacer"></span>
-  <mat-form-field appearance="outline">
-    <mat-label>Search by ID</mat-label>
-    <input matInput type="number" [(ngModel)]="searchId" (input)="searchUser()" />
+  <mat-form-field>
+    <input matInput type="number" [(ngModel)]="searchId" (input)="searchUser()" placeholder="Search by ID">
   </mat-form-field>
 </mat-toolbar>
 
