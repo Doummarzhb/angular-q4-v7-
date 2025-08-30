@@ -1,3 +1,13 @@
+<app-header></app-header>
 
 
-<router-outlet></router-outlet>
+<mat-progress-bar
+  *ngIf="loading.isLoading$ | async"
+  mode="indeterminate"
+  color="accent"
+  style="position:fixed; top:0; left:0; width:100%; z-index:1500;">
+</mat-progress-bar>
+
+<main class="app-main">
+  <router-outlet></router-outlet>
+</main>

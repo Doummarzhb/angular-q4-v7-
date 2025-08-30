@@ -1,0 +1,19 @@
+<div *ngIf="loading" class="spinner-overlay"><mat-spinner></mat-spinner></div>
+
+<div *ngIf="!loading && user" class="detail-card">
+  <button mat-button color="primary" (click)="back()" class="back-btn"><mat-icon>arrow_back</mat-icon> Back</button>
+
+  <mat-card class="user-card">
+    <img mat-card-image [src]="user.avatar" alt="{{user.first_name}}" class="avatar-large">
+    <mat-card-content>
+      <h2>{{user.first_name}} {{user.last_name}}</h2>
+      <p><strong>ID:</strong> {{user.id}}</p>
+      <p *ngIf="user.email"><strong>Email:</strong> {{user.email}}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div *ngIf="!loading && !user" class="centered" style="padding:40px;">
+  <p>User not found.</p>
+  <button mat-button (click)="back()">Back</button>
+</div>

@@ -1,0 +1,20 @@
+.list-wrapper { width:100%; max-width:1100px; margin: 0 auto; text-align:center; }
+
+.cards-grid {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.user-card {
+  width: 180px;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.user-card:hover { transform: translateY(-6px); box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
+
+.avatar { width:120px; height:120px; border-radius:50%; margin: 10px auto 0; display:block; object-fit:cover; }
+
+.pager { margin: 22px 0; display:flex; gap:12px; justify-content:center; align-items:center; }
