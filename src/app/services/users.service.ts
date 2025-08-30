@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of , BehaviorSubject } from 'rxjs';
 import { tap, map, catchError } from 'rxjs/operators';
 
 export interface User {
@@ -15,23 +15,38 @@ export interface User {
 export class UsersService {
   private userCache = new Map<number, User>();
   private pageCache = new Map<number, User[]>();
+  private searchResultsSubject = new BehaviorSubject<User[]>([]);
+  searchResults$ = this.searchResultsSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  getUsers(page: number): Observable<{ data: User[]; total_pages: number; page: number }> {
+  searchUserById(id: number) {
+    if (id === null || id === undefined) return;
+
+    if (this.userCache.has(id)) {
+      this.searchResultsSubject.next([this.userCache.get(id)!]);
+    } else {
+      this.getUserById(id).subscribe(user => {
+        this.searchResultsSubject.next(user ? [user] : []);
+      });
+    }
+  }
+
+  getUsers(page: number): Observable<{ data: User[]; total_pages: number; page: number; support?: any }> {
     if (this.pageCache.has(page)) {
-      return of({ data: this.pageCache.get(page)!, total_pages: this.pageCache.size ?  Math.max(1, this.pageCache.size) : 1, page });
+      return of({
+        data: this.pageCache.get(page)!,
+        total_pages: Math.max(1, this.pageCache.size),
+        page
+      });
     }
     return this.http.get<any>(`https://reqres.in/api/users?page=${page}`).pipe(
       tap(res => {
         res.data.forEach((u: User) => this.userCache.set(u.id, u));
         this.pageCache.set(page, res.data);
       }),
-      map(res => ({ data: res.data as User[], total_pages: res.total_pages, page: res.page })),
-      catchError(err => {
-        console.error('API error', err);
-        return of({ data: [], total_pages: 0, page: 1 });
-      })
+      map(res => ({ data: res.data as User[], total_pages: res.total_pages, page: res.page, support: res.support })),
+      catchError(err => of({ data: [], total_pages: 0, page: 1 }))
     );
   }
 

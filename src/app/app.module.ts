@@ -23,6 +23,7 @@ import { UserDetailComponent } from './pages/user-detail/user-detail.component';
 import { LoadingInterceptor } from './services/loading.interceptor';
 import { LoadingService } from './services/loading.service';
 import { UsersService } from './services/users.service';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -38,8 +39,10 @@ import { UsersService } from './services/users.service';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+
     // Angular Material imports
     MatToolbarModule,
+    MatTableModule,
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
