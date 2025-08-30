@@ -1,0 +1,15 @@
+<div *ngIf="loading" class="spinner-container">
+  <mat-spinner></mat-spinner>
+</div>
+
+<mat-card *ngIf="!loading">
+  <img mat-card-image [src]="user.avatar" alt="{{user.first_name}}">
+  <mat-card-content>
+    <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+    <p>ID: {{ user.id }}</p>
+    <p>Email: {{ user.email }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="goBack()">Back</button>
+  </mat-card-actions>
+</mat-card>
